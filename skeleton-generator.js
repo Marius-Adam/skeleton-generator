@@ -119,6 +119,7 @@ function processImage(img) {
 
     // Generate divs based on bounding boxes and append to the document
     generateBoundingBoxDivs(boundingBoxes, 10);
+    generateSkeletonCode(boundingBoxes, 10);
   } catch (err) {
     console.error("Error processing image:", err);
   } finally {
@@ -151,4 +152,18 @@ function generateBoundingBoxDivs(boundingBoxes, radius) {
 
     container.appendChild(div);
   });
+}
+
+function generateSkeletonCode(boundingBoxes, radius) {
+  const codeBlock = document.querySelector(".mockup-code pre code");
+
+  const skeletonCode = boundingBoxes.map((box) => {
+    // Generate the skeleton code with inline `style` for positioning
+    return `<Skeleton width={${box.width}} height={${box.height}}/>`;
+  });
+
+  // Join each skeleton component string with a newline for readability
+  const Code = skeletonCode.join("\n");
+
+  codeBlock.textContent = Code;
 }
