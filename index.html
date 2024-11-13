@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script
       async
+      defer
       src="https://docs.opencv.org/4.x/opencv.js"
       onload="onOpenCvReady()"
       type="text/javascript"
@@ -13,14 +14,47 @@
     <link rel="stylesheet" href="./style.css" />
     <title>Skeleton Generator</title>
   </head>
-  <body>
-    <div id="app">
-      <h1>Skeleton Generator</h1>
-      <p id="status">Loading OpenCV...</p>
-      <input type="file" id="imageUpload" accept="image/*" />
-      <canvas id="canvasOutput"></canvas>
-      <div id="boundingBoxContainer"></div>
+  <body
+    class="bg-base-200 font-sans text-gray-900 flex justify-center items-center min-h-screen"
+  >
+    <!-- Full-Screen Pre-loader Overlay -->
+    <div
+      id="preloader"
+      class="fixed inset-0 bg-base-100 flex flex-col justify-center items-center z-50"
+    >
+      <div class="text-center">
+        <span class="loading loading-spinner loading-lg text-primary mb-4"></span>
+        <h2 class="text-2xl font-semibold text-primary">Generator loading...</h2>
+        <p class="text-gray-500 mt-2">Please wait a moment</p>
+      </div>
     </div>
+
+    <!-- Main App Container -->
+    <div id="app" >
+      <h1 class="text-4xl font-bold text-center text-primary mb-6">Skeleton Generator</h1>
+      <div class="space-y-8">
+        <!-- Image Upload Section -->
+        <div class="flex justify-center">
+          <input
+            type="file"
+            id="imageUpload"
+            accept="image/*"
+            class="file-input file-input-bordered file-input-primary w-full max-w-xs"
+          />
+        </div>
+
+        <!-- Canvas Section -->
+        <div class="flex justify-center">
+          <canvas id="canvasOutput"></canvas>
+        </div>
+
+        <!-- Bounding Box Section -->
+        <div id="boundingBoxContainer">
+          <!-- Bounding boxes will go here -->
+        </div>
+      </div>
+    </div>
+
     <script src="/skeleton-generator.js"></script>
   </body>
 </html>

@@ -1,7 +1,9 @@
-// Callback to confirm OpenCV is ready
 function onOpenCvReady() {
-  document.getElementById("status").innerHTML = "OpenCV.js is ready!";
-  document.getElementById("imageUpload").addEventListener("change", handleImageUpload);
+  cv.onRuntimeInitialized = function () {
+    document.getElementById("preloader").style.display = "none";
+    document.getElementById("app").style.opacity = "1";
+    document.getElementById("imageUpload").addEventListener("change", handleImageUpload);
+  };
 }
 
 // Function to handle image upload
@@ -134,23 +136,18 @@ function processImage(img) {
 function generateBoundingBoxDivs(boundingBoxes, radius) {
   const container = document.getElementById("boundingBoxContainer");
   container.innerHTML = ""; // Clear any existing divs
-
-  container.style.height = "100vh;";
-  container.style.display = "block";
-
   boundingBoxes.forEach((box) => {
     const div = document.createElement("div");
 
-    // Set the size, position, and appearance of the div
+    // Add DaisyUI's skeleton class for a loading effect
+    div.className = "absolute skeleton";
+
+    // Add dynamic styling based on the bounding box dimensions and position
     div.style.width = `${box.width}px`;
     div.style.height = `${box.height}px`;
     div.style.borderRadius = `${radius}px`;
-    div.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
-
-    // Position the div based on the bounding box coordinates
-    div.style.position = "absolute";
-    div.style.left = `${box.x}px`; // Position relative to the left of the container
-    div.style.top = `${box.y}px`; // Position relative to the top of the container
+    div.style.left = `${box.x}px`;
+    div.style.top = `${box.y}px`;
 
     container.appendChild(div);
   });
