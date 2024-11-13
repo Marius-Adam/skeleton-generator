@@ -30,7 +30,7 @@
     </div>
 
     <!-- Main App Container -->
-    <div id="app" >
+    <div id="app" class="opacity-0 max-w-screen-xl mx-auto p-8 text-center">
       <h1 class="text-4xl font-bold text-center text-primary mb-6">Skeleton Generator</h1>
       <div class="space-y-8">
         <!-- Image Upload Section -->
@@ -42,20 +42,28 @@
             class="file-input file-input-bordered file-input-primary w-full max-w-xs"
           />
         </div>
-
         <!-- Canvas Section -->
         <div class="flex justify-center">
-          <canvas id="canvasOutput"></canvas>
+          <canvas id="canvasOutput" class="max-w-screen-xl rounded-xl"></canvas>
+        </div>
+
+        <!-- Preview Button -->
+        <div class="justify-center mb-4 hidden" id="previewBtnContainer">
+          <button id="previewBtn" class="btn btn-primary">Toggle Preview</button>
         </div>
 
         <!-- Bounding Box Section -->
-        <div id="boundingBoxContainer">
+        <div id="boundingBoxContainer" class="absolute right-0 w-full hidden">
           <!-- Bounding boxes will go here -->
         </div>
+
         <!-- Code Box Section -->
         <div id="codeBoxContainer">
           <div class="mockup-code">
-            <pre data-prefix="$"><code>Your skeletons will be generated here</code></pre>
+            <pre
+              data-prefix="$"
+              class="flex"
+            ><code>Your skeletons will be generated here</code></pre>
           </div>
         </div>
       </div>

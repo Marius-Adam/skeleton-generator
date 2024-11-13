@@ -112,14 +112,14 @@ function processImage(img) {
       });
     }
 
-    // Display the result on the canvas
     cv.imshow("canvasOutput", src);
-    console.log("Contours drawn:", filteredContours.size());
-    console.log("Bounding boxes:", boundingBoxes);
 
     // Generate divs based on bounding boxes and append to the document
     generateBoundingBoxDivs(boundingBoxes, 10);
-    generateSkeletonCode(boundingBoxes, 10);
+    generateSkeletonPseudoCode(boundingBoxes, 10);
+
+    // Show the Preview button after image upload
+    document.getElementById("previewBtnContainer").classList.remove("hidden");
   } catch (err) {
     console.error("Error processing image:", err);
   } finally {
@@ -154,16 +154,36 @@ function generateBoundingBoxDivs(boundingBoxes, radius) {
   });
 }
 
-function generateSkeletonCode(boundingBoxes, radius) {
-  const codeBlock = document.querySelector(".mockup-code pre code");
+function generateSkeletonPseudoCode(boundingBoxes, radius) {
+  const container = document.querySelector(".mockup-code");
+  container.innerHTML = "";
 
-  const skeletonCode = boundingBoxes.map((box) => {
-    // Generate the skeleton code with inline `style` for positioning
-    return `<Skeleton width={${box.width}} height={${box.height}}/>`;
+  boundingBoxes.forEach((box) => {
+    const variant = radius > 0 ? "rounded" : "rectangular";
+
+    const preBlock = document.createElement("pre");
+    const codeBlock = document.createElement("code");
+    codeBlock.textContent = `<Skeleton variant="${variant}" width={${box.width}} height={${box.height}} />`;
+
+    preBlock.appendChild(codeBlock);
+    preBlock.setAttribute('class', 'flex');
+
+    container.appendChild(preBlock);
   });
-
-  // Join each skeleton component string with a newline for readability
-  const Code = skeletonCode.join("\n");
-
-  codeBlock.textContent = Code;
 }
+
+document.getElementById("previewBtn").addEventListener("click", function() {
+  const codeBoxContainer = document.getElementById("codeBoxContainer");
+  const boundingBoxContainer = document.getElementById("boundingBoxContainer");
+
+  // Toggle visibility between code and bounding box containers
+  if (codeBoxContainer.classList.contains("hidden")) {
+    // Show code container, hide bounding box
+    codeBoxContainer.classList.remove("hidden");
+    boundingBoxContainer.classList.add("hidden");
+  } else {
+    // Show bounding box container, hide code
+    codeBoxContainer.classList.add("hidden");
+    boundingBoxContainer.classList.remove("hidden");
+  }
+});
