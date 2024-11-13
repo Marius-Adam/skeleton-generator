@@ -1,4 +1,4 @@
-function onOpenCvReady() {
+export function onOpenCvReady() {
   cv.onRuntimeInitialized = function () {
     document.getElementById("preloader").style.display = "none";
     document.getElementById("app").style.opacity = "1";
@@ -166,24 +166,8 @@ function generateSkeletonPseudoCode(boundingBoxes, radius) {
     codeBlock.textContent = `<Skeleton variant="${variant}" width={${box.width}} height={${box.height}} />`;
 
     preBlock.appendChild(codeBlock);
-    preBlock.setAttribute('class', 'flex');
+    preBlock.setAttribute("class", "flex");
 
     container.appendChild(preBlock);
   });
 }
-
-document.getElementById("previewBtn").addEventListener("click", function() {
-  const codeBoxContainer = document.getElementById("codeBoxContainer");
-  const boundingBoxContainer = document.getElementById("boundingBoxContainer");
-
-  // Toggle visibility between code and bounding box containers
-  if (codeBoxContainer.classList.contains("hidden")) {
-    // Show code container, hide bounding box
-    codeBoxContainer.classList.remove("hidden");
-    boundingBoxContainer.classList.add("hidden");
-  } else {
-    // Show bounding box container, hide code
-    codeBoxContainer.classList.add("hidden");
-    boundingBoxContainer.classList.remove("hidden");
-  }
-});
