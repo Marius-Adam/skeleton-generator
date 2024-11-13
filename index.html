@@ -4,13 +4,6 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script
-      async
-      defer
-      src="https://docs.opencv.org/4.x/opencv.js"
-      onload="onOpenCvReady()"
-      type="text/javascript"
-    ></script>
     <link rel="stylesheet" href="./style.css" />
     <title>Skeleton Generator</title>
   </head>
@@ -53,9 +46,10 @@
         </div>
 
         <!-- Bounding Box Section -->
-        <div id="boundingBoxContainer" class="absolute right-0 w-full hidden">
-          <!-- Bounding boxes will go here -->
-        </div>
+        <div
+          id="boundingBoxContainer"
+          class="absolute right-0 w-full hidden h-screen"
+        ></div>
 
         <!-- Code Box Section -->
         <div id="codeBoxContainer">
@@ -63,12 +57,18 @@
             <pre
               data-prefix="$"
               class="flex"
-            ><code>Your skeletons will be generated here</code></pre>
+            ><code>Your skeleton loaders will be generated here</code></pre>
           </div>
         </div>
       </div>
     </div>
-
+    <script
+      async
+      defer
+      src="https://docs.opencv.org/4.x/opencv.js"
+      onload="onOpenCvReady()"
+      type="text/javascript"
+    ></script>
     <script src="/skeleton-generator.js"></script>
   </body>
 </html>
